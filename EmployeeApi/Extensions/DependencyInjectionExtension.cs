@@ -24,6 +24,7 @@ public static class DependencyInjectionExtension
         services
             .AddTransient<IEmployeeService, EmployeeService>()
             .AddTransient<IGroupService, GroupService>()
+            .AddTransient<DataFactory>()
             .AddTransient<DatabaseSeeder>();
 
     }
