@@ -1,5 +1,7 @@
 using EmployeeApi.Data;
 using EmployeeApi.Repositories;
+using EmployeeApi.Services;
+using EmployeeApi.Services.impls;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeApi.Extensions;
@@ -14,5 +16,12 @@ public static class DependencyInjectionExtension
             })
             .AddTransient(typeof(IRepository<>),typeof(Repository<>))
             .AddTransient<IPersistence, DbPersistence>();
+    }
+    
+    public static void AddServices(this IServiceCollection services)
+    {
+        services
+            .AddTransient<IEmployeeService, EmployeeService>()
+            .AddTransient<IGroupService,GroupService>();
     }
 }

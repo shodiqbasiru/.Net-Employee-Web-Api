@@ -9,8 +9,14 @@ public class Employee
     [Key,Column(name:"id")]
     public Guid Id { get; set; }
     
-    [Column(name:"employee_name",TypeName = "NVarchar(50)"),Required]
+    [Column(name: "username", TypeName = "NVarchar(50)")]
+    public string Username { get; set; } = string.Empty;
+    
+    [Column(name:"employee_name",TypeName = "NVarchar(100)")]
     public string EmployeeName { get; set; } = string.Empty;
+    
+    [Column(name: "email", TypeName = "NVarchar(50)")]
+    public string? Email { get; set; }
     
     [Column(name:"address",TypeName = "NVarchar(250)")]
     public string? Address { get; set; }
@@ -24,12 +30,15 @@ public class Employee
     [Column(name:"basic_salary")]
     public double BasicSalary { get; set; }
     
+    [Column(name: "is_active")]
+    public bool IsActive { get; set; }
+    
     [Column(name:"group_id")]
     public Guid GroupId { get; set; }
     
-    [Column(name:"account_id")]
-    public Guid AccountId { get; set; }
-    
-    public Account Account { get; set; }
+    [Column(name: "created_at")]
+    public DateTime CreatedAt { get; set; }
+
+
     public Group Group { get; set; }
 }
