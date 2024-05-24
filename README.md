@@ -46,6 +46,3 @@ The API exposes several endpoints for managing employees and groups:
 
 Similar endpoints are available for managing groups.
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
