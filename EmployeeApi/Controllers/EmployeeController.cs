@@ -63,6 +63,37 @@ public class EmployeeController : ControllerBase
         return Ok(response);
     }
 
+    [HttpGet("pagination")]
+    public async Task<IActionResult> GetAllEmployeesWithPaginate(
+        [FromQuery] int pageSize = 10,
+        [FromQuery] int page = 1
+    )
+    {
+        PageRequest pageRequest = new()
+        {
+            CurrentPage = page,
+            PageSize = pageSize
+        };
+        var employees = await _service.GetAllEmployees(pageRequest);
+        var employeeResponses = employees.Content;
+        var response = new ApiResponse<IEnumerable<EmployeeResponse>>
+        {
+            StatusCode = (int)HttpStatusCode.OK,
+            Status = HttpStatusCode.OK.ToString(),
+            Message = "Employees found successfully",
+            Data = employeeResponses,
+            PageResult = new PageResponse
+            {
+                CurrentPage = employees.CurrentPage,
+                PageSize = employees.PageSize,
+                TotalItems = employees.TotalItems,
+                TotalPages = employees.TotalPages
+            }
+        };
+
+        return Ok(response);
+    }
+
     [HttpPut]
     public async Task<IActionResult> UpdateEmployee([FromBody] UpdateEmployeeRequest request)
     {

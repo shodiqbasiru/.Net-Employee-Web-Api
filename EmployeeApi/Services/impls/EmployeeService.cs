@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using EmployeeApi.Entities;
 using EmployeeApi.Models.Requests;
 using EmployeeApi.Models.Responses;
@@ -55,6 +56,23 @@ public class EmployeeService : IEmployeeService
     {
         var employees = await _repository.FindAllAsync(new[] { "Group" });
         return employees.Select(GetEmployeeResponse);
+    }
+
+    public async Task<PageResult<EmployeeResponse>> GetAllEmployees(PageRequest request)
+    {
+        if (request.CurrentPage < 1) request.CurrentPage = 1;
+        
+        var page = request.CurrentPage;
+        var size = request.PageSize;
+        var include = new[] { "Group" };
+        var employees = await _repository.FindAllAsync(page, size, include);
+        return new PageResult<EmployeeResponse>
+        {
+            TotalItems = employees.TotalItems,
+            CurrentPage = employees.CurrentPage,
+            PageSize = employees.PageSize,
+            Content = employees.Content.Select(GetEmployeeResponse)
+        };
     }
 
     public async Task<Employee> UpdateEmployee(UpdateEmployeeRequest request)
