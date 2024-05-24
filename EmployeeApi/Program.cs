@@ -1,4 +1,5 @@
 using EmployeeApi.Extensions;
+using EmployeeApi.Factories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRepositories(builder.Configuration);
+builder.Services.AddServices();
 
 var app = builder.Build();
 
@@ -21,4 +23,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+    await seeder.SeedData();
+}
+
+await app.RunAsync();
