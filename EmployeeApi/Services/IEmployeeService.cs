@@ -10,5 +10,6 @@ public interface IEmployeeService
     Task<Employee> GetById(string id);
     Task<EmployeeResponse> GetEmployeeById(string id);
     Task<IEnumerable<EmployeeResponse>> GetAllEmployees();
+    Task<PageResult<EmployeeResponse>> GetAllEmployees(PageRequest request);
     Task<Employee> UpdateEmployee(UpdateEmployeeRequest request);
 }

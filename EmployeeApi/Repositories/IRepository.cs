@@ -1,4 +1,6 @@
 using System.Linq.Expressions;
+using EmployeeApi.Models.Requests;
+using EmployeeApi.Models.Responses;
 
 namespace EmployeeApi.Repositories;
 
@@ -13,6 +15,10 @@ public interface IRepository<TEntity>
     Task<List<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> criteria);
     Task<List<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> criteria, string[] includes);
     Task<List<TEntity>> FindAllAsync(string[] includes);
+    Task<PageResult<TEntity>> FindAllAsync(int page, int pageSize);
+    Task<PageResult<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> criteria, int page, int pageSize);
+    Task<PageResult<TEntity>> FindAllAsync(int page, int pageSize, string[] includes);
+    Task<PageResult<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> criteria, int page, int pageSize, string[] includes);
     TEntity Update(TEntity entity);
     void Delete(TEntity entity);
 }
