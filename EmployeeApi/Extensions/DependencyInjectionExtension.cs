@@ -1,4 +1,5 @@
 using EmployeeApi.Data;
+using EmployeeApi.Factories;
 using EmployeeApi.Repositories;
 using EmployeeApi.Services;
 using EmployeeApi.Services.impls;
@@ -14,7 +15,7 @@ public static class DependencyInjectionExtension
             {
                 builder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             })
-            .AddTransient(typeof(IRepository<>),typeof(Repository<>))
+            .AddTransient(typeof(IRepository<>), typeof(Repository<>))
             .AddTransient<IPersistence, DbPersistence>();
     }
     
@@ -22,6 +23,8 @@ public static class DependencyInjectionExtension
     {
         services
             .AddTransient<IEmployeeService, EmployeeService>()
-            .AddTransient<IGroupService,GroupService>();
+            .AddTransient<IGroupService, GroupService>()
+            .AddTransient<DatabaseSeeder>();
+
     }
 }

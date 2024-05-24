@@ -33,7 +33,7 @@ namespace EmployeeApi.Migrations
                     employeename = table.Column<string>(name: "employee_name", type: "NVarchar(100)", nullable: false),
                     email = table.Column<string>(type: "NVarchar(50)", nullable: true),
                     address = table.Column<string>(type: "NVarchar(250)", nullable: true),
-                    phonenumber = table.Column<string>(name: "phone_number", type: "NVarchar(14)", nullable: true),
+                    phonenumber = table.Column<string>(name: "phone_number", type: "NVarchar(20)", nullable: true),
                     birthdate = table.Column<DateTime>(name: "birth_date", type: "datetime2", nullable: false),
                     basicsalary = table.Column<double>(name: "basic_salary", type: "float", nullable: false),
                     isactive = table.Column<bool>(name: "is_active", type: "bit", nullable: false),

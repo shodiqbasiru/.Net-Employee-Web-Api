@@ -21,7 +21,7 @@ public class Employee
     [Column(name:"address",TypeName = "NVarchar(250)")]
     public string? Address { get; set; }
     
-    [Column(name:"phone_number",TypeName = "NVarchar(14)")]
+    [Column(name:"phone_number",TypeName = "NVarchar(20)")]
     public string? PhoneNumber { get; set; }
     
     [Column(name:"birth_date")]

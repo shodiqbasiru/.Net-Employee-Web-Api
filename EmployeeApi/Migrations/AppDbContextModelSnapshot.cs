@@ -63,7 +63,7 @@ namespace EmployeeApi.Migrations
                         .HasColumnName("is_active");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("NVarchar(14)")
+                        .HasColumnType("NVarchar(20)")
                         .HasColumnName("phone_number");
 
                     b.Property<string>("Username")
